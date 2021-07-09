@@ -87,9 +87,13 @@ class LengkapiProfil extends StatelessWidget {
           padding: const EdgeInsets.only(left:30, right:30),
           child: TextFormField(
             decoration: const InputDecoration(
-              icon: Icon(
-                Icons.person,
-                color: Colors.blue,
+              icon: CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 18,
+                child: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
               ),
               border: UnderlineInputBorder(),
               enabledBorder: UnderlineInputBorder(
@@ -117,9 +121,13 @@ class LengkapiProfil extends StatelessWidget {
           padding: const EdgeInsets.only(left: 30, right:30),
           child: TextFormField(
             decoration: const InputDecoration(
-              icon: Icon(
-                Icons.alternate_email,
-                color: Colors.blue,
+            icon: CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 18,
+                child: Icon(
+                  Icons.alternate_email_rounded,
+                  color: Colors.white,
+                ),
               ),
               border: UnderlineInputBorder(),
               enabledBorder: UnderlineInputBorder(
@@ -147,9 +155,13 @@ class LengkapiProfil extends StatelessWidget {
           padding: const EdgeInsets.only(left: 30, right:30),
           child: TextFormField(
             decoration: const InputDecoration(
-              icon: Icon(
-                Icons.plus_one,
-                color: Colors.blue,
+             icon: CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 18,
+                child: Icon(
+                  Icons.plus_one,
+                  color: Colors.white,
+                ),
               ),
               border: UnderlineInputBorder(),
               enabledBorder: UnderlineInputBorder(
