@@ -19,7 +19,7 @@ class _DetailPekerjaanState extends State<DetailPekerjaan> {
               Container(
                 height: 250,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Color(0xff528FFF),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),

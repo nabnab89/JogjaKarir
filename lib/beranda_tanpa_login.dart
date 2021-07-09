@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jogja_karir/home_with_login.dart';
 import './home.dart';
 import './bookmark.dart';
 import './profil.dart';
@@ -12,7 +13,7 @@ class BerandaTanpaLogin extends StatefulWidget {
 
 class _BerandaTanpaLoginState extends State<BerandaTanpaLogin> {
   int _bottomNavCurrentIndex = 0;
-  List<Widget> _container = [new Home(), new Bookmark(), new InformasiProfil()];
+  List<Widget> _container = [new HomeWithLogin(), new Bookmark(), new InformasiProfil()];
 
     @override
   void initState() {
