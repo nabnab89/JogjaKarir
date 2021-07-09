@@ -87,7 +87,14 @@ class _MyAppState extends State<Register> {
                 width: 3.0,
               ),
             ),
-            icon: Icon(Icons.alternate_email_rounded),
+              icon: CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 18,
+              child: Icon(
+                Icons.alternate_email_rounded,
+                color: Colors.white,
+              ),
+            ),
             hintText: "emailkamu@gmail.com",
             hintStyle: TextStyle(color: Color(0xffccd1ff)),
           ),
@@ -124,7 +131,14 @@ class _MyAppState extends State<Register> {
                 width: 3.0,
               ),
             ),
-            icon: Icon(Icons.lock_rounded),
+              icon: CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 18,
+              child: Icon(
+                Icons.lock_rounded,
+                color: Colors.white,
+              ),
+            ),
             hintText: "password kamu",
             hintStyle: TextStyle(color: Color(0xffccd1ff)),
           ),
@@ -162,7 +176,14 @@ class _MyAppState extends State<Register> {
                 width: 3.0,
               ),
             ),
-            icon: Icon(Icons.lock_rounded),
+              icon: CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 18,
+              child: Icon(
+                Icons.lock_rounded,
+                color: Colors.white,
+              ),
+            ),
             hintText: "ulangin password kamu",
             hintStyle: TextStyle(color: Color(0xffccd1ff)),
           ),
