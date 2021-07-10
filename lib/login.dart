@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jogja_karir/ganti_password1.dart';
 import 'package:jogja_karir/register.dart';
 
+import 'detail_pekerjaan2.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();

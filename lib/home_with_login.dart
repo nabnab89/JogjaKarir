@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:jogja_karir/model/job.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:jogja_karir/detail_pekerjaan2.dart';
+import 'package:jogja_karir/login.dart';
+import 'package:jogja_karir/kebijakan.dart';
 import 'package:jogja_karir/search.dart';
-import 'package:jogja_karir/widgets/divider_line.dart';
 
-import 'kebijakan.dart';
-import 'login.dart';
+import 'job_slider.dart';
+import 'model/job.dart';
 
-class HomeWithLogin extends StatelessWidget {
+class HomeWithLogin extends StatefulWidget {
+
+  @override
+  _AkunState createState() => _AkunState();
+}
+
+class _AkunState extends State<HomeWithLogin> {
   final List<Job> jobList = Job.getJob();
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       appBar: AppBar(
         title: Text('Beranda'),
         centerTitle: true,
@@ -25,308 +37,762 @@ class HomeWithLogin extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Container(
-        width: 250,
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(35), bottomRight: Radius.circular(35)),
-          child: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                Container(
-                  height: 90,
-                  child: DrawerHeader(
-                    child: Text(
-                      'Menu',
-                      style: TextStyle(fontSize: 30),
-                    ),
+      drawer: ClipRRect(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(35), bottomRight: Radius.circular(35)),
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              Container(
+                height: 90,
+                child: DrawerHeader(
+                  child: Text(
+                    'Menu',
+                    style: TextStyle(fontSize: 40),
                   ),
                 ),
-                ListTile(
-                  title: Text('Login disini'),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  },
-                ),
-                DividerLine(),
-                ListTile(
-                  title: Text('Kebijakan'),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Kebijakan()));
-                  },
-                ),
-                DividerLine(),
-                ListTile(
-                  title: Text('Pengaturan'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                DividerLine(),
-                ListTile(
-                  title: Text('Update Aplikasi'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                DividerLine(),
-              ],
+              ),
+              ListTile(
+                title: Text('Login disini'),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Login()));
+                },
+              ),
+              ListTile(
+                title: Text('Kebijakan'),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Kebijakan()));
+                },
+              ),
+              ListTile(
+                title: Text('Pengaturan'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Update Aplikasi'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: new Scaffold(
+          body: new Container(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(10,10,10,0),
+              height: 700,
+              width: double.maxFinite,
+              child: ListView(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                  ),
+                  Text(
+                    "Untuk Kamu",
+                    style:
+                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    height: 180.0,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: jobList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return jobCardTemplate(jobList[index], context);
+                        }),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                  ),
+                  Text(
+                    "Lowongan Terbaru",
+                    style:
+                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                  ),
+                  Card(
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => KirimLamaran()));
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(7),
+                        child: Stack(
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Stack(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10, top:5),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            icon(),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            namaPekerjaan(),
+                                            Spacer(),
+                                            iconsimpan(),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            gajidanlokasi(),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            syarat1(),
+                                            syarat2(),
+                                            Spacer(),
+                                            tanggal(),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.all(7),
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10, top:5),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          icon2(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          namaPekerjaan2(),
+                                          Spacer(),
+                                          iconsimpan2(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          gajidanlokasi2(),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          syarat12(),
+                                          syarat22(),
+                                          Spacer(),
+                                          tanggal2(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.all(7),
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10, top:5),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          icon3(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          namaPekerjaan3(),
+                                          Spacer(),
+                                          iconsimpan3(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          gajidanlokasi3(),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          syarat13(),
+                                          syarat23(),
+                                          Spacer(),
+                                          tanggal3(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.all(7),
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10, top:5),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          icon(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          namaPekerjaan(),
+                                          Spacer(),
+                                          iconsimpan(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          gajidanlokasi(),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          syarat1(),
+                                          syarat2(),
+                                          Spacer(),
+                                          tanggal(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+
+              ),
             ),
           ),
         ),
       ),
-      body: Content()
+    );
+  }
+  Widget iconsimpan() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 15),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: IconButton(
+            icon : Icon(Icons.bookmark_outline),
+            color: Colors.grey,
+            iconSize: 30,
+            onPressed : () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Kamu ngga bisa nyimpan!",
+                  style: TextStyle(fontSize: 15),
+                  textAlign: TextAlign.center,
+                ),
+                  duration: Duration(seconds: 3),
+                  shape: StadiumBorder(),
+                  width: 250,
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            }
+        ),
+      ),
     );
   }
 }
-
-class Content extends StatelessWidget {
-  // final List<Movie> movieList = Movie.getMovies();
-  final List<Job> jobList = Job.getJob();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
-      child: ListView(
+Widget icon() {
+  return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: new Image.asset('images/bni.png',
+          width: 50,
+          height: 50,),
+      )
+  );
+}
+Widget namaPekerjaan() {
+  return Padding(
+    padding: EdgeInsets.only(left: 10),
+    child: RichText(
+      text: TextSpan(
+        text: "Bank BNI",
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+              text: "\nCustomer Service",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              )
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget gajidanlokasi() {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15),
+      child: Row(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                'Untuk Kamu',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    color: Colors.black
-                ),
+          RichText(
+            textAlign: TextAlign.left,
+            text: TextSpan(
+              text: "Rp. 1.730.000",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
               ),
-              Text(
-                'Lihat Semua',
-                style: TextStyle(
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline
-                ),
-              ),
-            ],
-          ),
-          Container(
-            height: 200.0,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: jobList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return jobCardTemplate(jobList[index], context);
-                }),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Lowongan Terbaru',
+              children: <TextSpan>[
+                TextSpan(
+                  text: "\nYogyakarta, Indonesia",
                   style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20,
-                      color: Colors.black
+                    color: Colors.black,
+                    fontSize: 15,
                   ),
                 ),
-                Container(
-                  height: 247.0,
-                  child: ListView.builder(
-                      itemCount: jobList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return jobCardTemplate2(jobList[index], context);
-                      }),
-                ),
               ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+Widget syarat1() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 50,
+              child: Text(
+                "SMA",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
+              ),
             ),
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
 }
-
-Widget jobCardTemplate(Job job, BuildContext context) {
-  return InkWell(
-    child: Container(
-      height: 180,
-      width: 320.0,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15))
-        ),
-        elevation: 1,
-        color: Colors.white,
-        child: Padding(
-          padding: EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        job.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 17.5
-                        ),
-                      ),
-                      Text(
-                        job.salary,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 15
-                        ),
-                      ),
-                    ],
-                  ),
-                 Icon(Icons.bookmark_border_outlined)
-                ],
+Widget syarat2() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 100,
+              child: Text(
+                "Full Time",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        child: Image(
-                          image: AssetImage(
-                            job.companyImage,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            job.company,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            job.location,
-                            style: TextStyle(
-                              fontSize: 13,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Text(job.publishedAt)
-                ],
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     ),
   );
 }
-
-Widget jobCardTemplate2(Job job, BuildContext context) {
-  return InkWell(
-    child: Container(
-      height: 175,
-      width: 320.0,
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15))
-        ),
-        elevation: 1,
-        color: Colors.white,
-        child: Padding(
-          padding: EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        child: Image(
-                          image: AssetImage(
-                            job.companyImage,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            job.company,
-                            style: TextStyle(
-                              fontSize: 13,
-                            ),
-                          ),
-                          Text(
-                            job.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Icon(Icons.bookmark_border_outlined)
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        job.salary,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17.5
-                        ),
-                      ),
-                      Text(
-                        job.location,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 15
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(job.publishedAt)
-                ],
-              ),
-            ],
-          ),
-        ),
+Widget tanggal() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15, bottom: 15),
+    child: Align(
+      alignment: Alignment.bottomRight,
+      child: Text("10 Des '21",
       ),
     ),
   );
 }
-
+Widget icon2() {
+  return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: new Image.asset('images/ruangguru.png',
+          width: 50,
+          height: 50,),
+      )
+  );
+}
+Widget namaPekerjaan2() {
+  return Padding(
+    padding: EdgeInsets.only(left: 10),
+    child: RichText(
+      text: TextSpan(
+        text: "Ruang Guru",
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+              text: "\nCustomer Service",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              )
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget iconsimpan2() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15),
+    child: Align(
+      alignment: Alignment.centerRight,
+      child: Icon(
+        Icons.bookmark_outline,
+        color: Colors.grey,
+        size: 30,
+      ),
+    ),
+  );
+}
+Widget gajidanlokasi2() {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15),
+      child: Row(
+        children: <Widget>[
+          RichText(
+            textAlign: TextAlign.left,
+            text: TextSpan(
+              text: "Rp. 1.730.000",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: "\nYogyakarta, Indonesia",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+Widget syarat12() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 50,
+              child: Text(
+                "SMA",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget syarat22() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 100,
+              child: Text(
+                "Full Time",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget tanggal2() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15, bottom: 15),
+    child: Align(
+      alignment: Alignment.bottomRight,
+      child: Text("6 Des '21",
+      ),
+    ),
+  );
+}
+Widget icon3() {
+  return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: new Image.asset('images/ruangguru.png',
+          width: 50,
+          height: 50,),
+      )
+  );
+}
+Widget namaPekerjaan3() {
+  return Padding(
+    padding: EdgeInsets.only(left: 10),
+    child: RichText(
+      text: TextSpan(
+        text: "Ruang Guru",
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+              text: "\nMarketing Online",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              )
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget iconsimpan3() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15),
+    child: Align(
+      alignment: Alignment.centerRight,
+      child: Icon(
+        Icons.bookmark_outline,
+        color: Colors.grey,
+        size: 30,
+      ),
+    ),
+  );
+}
+Widget gajidanlokasi3() {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15),
+      child: Row(
+        children: <Widget>[
+          RichText(
+            textAlign: TextAlign.left,
+            text: TextSpan(
+              text: "Rp. 1.730.000",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: "\nYogyakarta, Indonesia",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+Widget syarat13() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 50,
+              child: Text(
+                "SMA",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget syarat23() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top:15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 100,
+              child: Text(
+                "Full Time",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget tanggal3() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15, bottom: 15),
+    child: Align(
+      alignment: Alignment.bottomRight,
+      child: Text("6 Des '21",
+      ),
+    ),
+  );
+}
