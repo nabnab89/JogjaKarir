@@ -1,6 +1,6 @@
-import 'package:belajarflutter/kebijakan.dart';
+import 'package:jogja_karir/kebijakan.dart';
 import 'package:flutter/material.dart';
-import 'package:belajarflutter/login.dart';
+import 'package:jogja_karir/login.dart';
 
 class BookmarkLogin extends StatefulWidget {
   @override
