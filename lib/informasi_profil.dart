@@ -167,7 +167,7 @@ class _InformasiProfilState extends State<InformasiProfil> {
                             child: TextButton.icon(
                              onPressed: (){
                 Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => InformasiProfil22()));
+                  MaterialPageRoute(builder: (context) => InformasiProfil2()));
                 },
                               icon: CircleAvatar(
                                 backgroundColor: Colors.blue,
@@ -190,12 +190,7 @@ class _InformasiProfilState extends State<InformasiProfil> {
                 Navigator.push(context,
                   MaterialPageRoute(builder: (context) => GantiPassword1()));
                 },
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResetPassword1()));
-                              },
+                                
                               icon: CircleAvatar(
                                 backgroundColor: Colors.blue,
                                 radius: 18,
@@ -219,12 +214,7 @@ class _InformasiProfilState extends State<InformasiProfil> {
                   }
                   );
                 },
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertLoogout();
-                                  });
-                            },
+                              
                             icon: CircleAvatar(
                               backgroundColor: Colors.red,
                               radius: 18,
