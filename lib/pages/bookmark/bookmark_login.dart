@@ -1,6 +1,4 @@
-import 'package:jogja_karir/kebijakan.dart';
 import 'package:flutter/material.dart';
-import 'package:jogja_karir/login.dart';
 
 class BookmarkLogin extends StatefulWidget {
   @override
@@ -16,62 +14,6 @@ class _BookmarkLogin extends State<BookmarkLogin> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
-        title: Text('Bookmark'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      drawer: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(35), bottomRight: Radius.circular(35)),
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              Container(
-                height: 90,
-                child: DrawerHeader(
-                  child: Text(
-                    'Menu',
-                    style: TextStyle(fontSize: 40),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Text('Login disini'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
-                },
-              ),
-              ListTile(
-                title: Text('Kebijakan'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Kebijakan()));
-                },
-              ),
-              ListTile(
-                title: Text('Pengaturan'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Update Aplikasi'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
       body: SafeArea(
         child: new Scaffold(
           body: new Container(
@@ -97,7 +39,7 @@ class _BookmarkLogin extends State<BookmarkLogin> {
                                 children: <Widget>[
                                   Padding(
                                     padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
+                                    const EdgeInsets.only(left: 10, top: 5),
                                     child: Column(
                                       children: <Widget>[
                                         Row(
@@ -154,7 +96,7 @@ Widget bniIcon() {
     child: Align(
         alignment: Alignment.centerLeft,
         child: new Image.asset(
-          'assets/BNI.png',
+          'images/bni.png',
           width: 50,
           height: 50,
         )),
@@ -305,15 +247,3 @@ Widget tanggal() {
   );
 }
 
-Widget rgIcon1() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 15),
-    child: Align(
-        alignment: Alignment.centerLeft,
-        child: new Image.asset(
-          'assets/RG.png',
-          width: 50,
-          height: 50,
-        )),
-  );
-}

@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Kebijakan extends StatefulWidget {
-
-  @override
-  _KebijakanState createState() => _KebijakanState();
-}
-
-class _KebijakanState extends State<Kebijakan> {
+class Kebijakan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
         title: Text('Kebijakan'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              
-            },
-          ),
-        ],
       ),
       body: SafeArea(
         child: ListView(

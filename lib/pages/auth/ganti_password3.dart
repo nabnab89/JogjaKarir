@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jogja_karir/ganti_password4.dart';
+import 'ganti_password4.dart';
 
 class GantiPassword3 extends StatefulWidget {
 

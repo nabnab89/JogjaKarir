@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jogja_karir/ganti_password2.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:jogja_karir/firebase/auth_services.dart';
 
 class GantiPassword1 extends StatefulWidget {
 
@@ -8,6 +9,9 @@ class GantiPassword1 extends StatefulWidget {
 }
 
 class _GantiPassword1State extends State<GantiPassword1> {
+  TextEditingController emailController = TextEditingController(text: "");
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +24,7 @@ class _GantiPassword1State extends State<GantiPassword1> {
         child: ListView(
           children: [
             Text(
-              "Masukkan email yang tertaut dengan akun kamu dan kami akan kirimkan email dengan interuksi untuk mengganti password.",
+              "Masukkan email yang tertaut dengan akun kamu dan kami akan kirimkan email dengan instruksi untuk mengganti password.",
               style: TextStyle(
                 fontSize: 19,
               ),
@@ -38,10 +42,16 @@ class _GantiPassword1State extends State<GantiPassword1> {
                     ),
                   ),
                   Form(
+                    key: _formKey,
                     child: TextFormField(
+                      validator: MultiValidator([
+                        RequiredValidator(errorText: 'Isi Email-mu disini!'),
+                        EmailValidator(errorText: 'Format Email tidak valid!')
+                      ]),
+                      controller: emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: "Dadang@gmail.com"),
+                        hintText: "@gmail.com"),
                       ),
                     ),
                     Padding(padding: EdgeInsets.only(top:30),),
@@ -62,8 +72,12 @@ class _GantiPassword1State extends State<GantiPassword1> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => GantiPassword2()));
+                        if (_formKey.currentState!.validate()) {
+                          print('Email Request sent');
+                        }
+                        AuthServices.resetPassword(emailController.text);
+                        // Navigator.push(context,
+                        // MaterialPageRoute(builder: (context) => GantiPassword2()));
                       },
                     ),
                 ],

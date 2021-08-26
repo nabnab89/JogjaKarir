@@ -1,14 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:jogja_karir/firebase/auth_services.dart';
 
-class AlertLoogout extends StatefulWidget {
-
+class AlertLogout extends StatefulWidget {
   @override
-  _AlertLoogoutState createState() => _AlertLoogoutState();
+  _AlertLogoutState createState() => _AlertLogoutState();
 }
 
-class _AlertLoogoutState extends State<AlertLoogout> {
-
+class _AlertLogoutState extends State<AlertLogout> {
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
@@ -16,7 +15,7 @@ class _AlertLoogoutState extends State<AlertLoogout> {
       child: AlertDialog(
         backgroundColor: Colors.white54,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16))
+            borderRadius: BorderRadius.all(Radius.circular(16))
         ),
         title: Center(
           child: Text(
@@ -35,18 +34,23 @@ class _AlertLoogoutState extends State<AlertLoogout> {
                 onPressed: () {},
                 color: Colors.blue,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8))
+                    borderRadius: BorderRadius.all(Radius.circular(8))
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                  ),
-                  child: Text(
-                    "Tidak",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: Text(
+                      "Tidak",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                      ),
                     ),
                   ),
                 ),
@@ -62,12 +66,15 @@ class _AlertLoogoutState extends State<AlertLoogout> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  await AuthServices.signOut();
+                  Navigator.of(context, rootNavigator: true).pop('dialog');
+                },
                 child: Text(
                   "Ya",
                   style: TextStyle(
                     color: Colors.blue,
-                    fontSize: 11, 
+                    fontSize: 11,
                   ),
                 ),
               ),

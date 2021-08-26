@@ -1,132 +1,44 @@
-import 'package:jogja_karir/bookmark_login.dart';
-import 'package:jogja_karir/kebijakan.dart';
 import 'package:flutter/material.dart';
-import 'package:jogja_karir/login.dart';
 
-class HasilSearch extends StatefulWidget {
+class RiwayatLamaran extends StatefulWidget {
   @override
-  _HasilSearch createState() => new _HasilSearch();
+  _RiwayatLamaranState createState() => _RiwayatLamaranState();
 }
 
-class _HasilSearch extends State<HasilSearch> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _RiwayatLamaranState extends State<RiwayatLamaran> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
+        title: Text('Riwayat Lamaran'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
       ),
-      drawer: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(35), bottomRight: Radius.circular(35)),
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              Container(
-                height: 90,
-                child: DrawerHeader(
-                  child: Text(
-                    'Menu',
-                    style: TextStyle(fontSize: 40),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Text('Login disini'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
-                },
-              ),
-              ListTile(
-                title: Text('Kebijakan'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Kebijakan()));
-                },
-              ),
-              ListTile(
-                title: Text('Pengaturan'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Update Aplikasi'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: HistoryPage(),
+    );
+  }
+}
+
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: SafeArea(
         child: new Scaffold(
           body: new Container(
-            child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                height: 550,
-                width: double.maxFinite,
-                child: ListView(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(15.0),
-                        ),
-                        Text(
-                          "Ada  ",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 1),
-                        ),
-                        Text(
-                          "32 Lowongan Design Grafis",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                        ),
-                        Text(
-                          "di",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                        ),
-                        Text(
-                          "Yogyakarta",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 16.0),
-                    ),
-                    Card(
-                      elevation: 5,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              height: 700,
+              width: double.maxFinite,
+              child: ListView(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                  ),
+                  Card(
+                    child: InkWell(
+                      onTap: () {},
                       child: Padding(
                         padding: EdgeInsets.all(7),
                         child: Stack(
@@ -137,18 +49,18 @@ class _HasilSearch extends State<HasilSearch> {
                                 children: <Widget>[
                                   Padding(
                                     padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
+                                    const EdgeInsets.only(left: 10, top: 5),
                                     child: Column(
                                       children: <Widget>[
                                         Row(
                                           children: <Widget>[
-                                            bniIcon(),
+                                            icon(),
                                             SizedBox(
                                               height: 10,
                                             ),
                                             namaPekerjaan(),
                                             Spacer(),
-                                            iconSimpan(),
+                                            iconsimpan(context),
                                             SizedBox(
                                               width: 10,
                                             ),
@@ -156,7 +68,7 @@ class _HasilSearch extends State<HasilSearch> {
                                         ),
                                         Row(
                                           children: <Widget>[
-                                            gajilokasi(),
+                                            gajidanlokasi(),
                                           ],
                                         ),
                                         Row(
@@ -177,112 +89,164 @@ class _HasilSearch extends State<HasilSearch> {
                         ),
                       ),
                     ),
-                    Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(7),
-                        child: Stack(
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Stack(
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            rgIcon1(),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            namaPekerjaan1(),
-                                            Spacer(),
-                                            iconSimpan1(),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            gajilokasi1(),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            syarat11(),
-                                            syarat21(),
-                                            Spacer(),
-                                            tanggal1(),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.all(7),
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(left: 10, top: 5),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          icon2(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          namaPekerjaan2(),
+                                          Spacer(),
+                                          iconsimpan2(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          gajidanlokasi2(),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          syarat12(),
+                                          syarat22(),
+                                          Spacer(),
+                                          tanggal2(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(7),
-                        child: Stack(
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Stack(
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            rgIcon2(),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            namaPekerjaan2(),
-                                            Spacer(),
-                                            iconSimpan2(),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            gajilokasi2(),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            syarat12(),
-                                            syarat22(),
-                                            Spacer(),
-                                            tanggal12(),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.all(7),
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(left: 10, top: 5),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          icon3(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          namaPekerjaan3(),
+                                          Spacer(),
+                                          iconsimpan3(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          gajidanlokasi3(),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          syarat13(),
+                                          syarat23(),
+                                          Spacer(),
+                                          tanggal3(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.all(7),
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(left: 10, top: 5),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          icon(),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          namaPekerjaan(),
+                                          Spacer(),
+                                          iconsimpan(context),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          gajidanlokasi(),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          syarat1(),
+                                          syarat2(),
+                                          Spacer(),
+                                          tanggal(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -292,17 +256,45 @@ class _HasilSearch extends State<HasilSearch> {
   }
 }
 
-Widget bniIcon() {
+Widget iconsimpan(BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.only(left: 15),
+    padding: const EdgeInsets.only(right: 15),
     child: Align(
+      alignment: Alignment.centerRight,
+      child: IconButton(
+          icon: Icon(Icons.bookmark_outline),
+          color: Colors.grey,
+          iconSize: 30,
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Kamu ngga bisa nyimpan!",
+                  style: TextStyle(fontSize: 15),
+                  textAlign: TextAlign.center,
+                ),
+                duration: Duration(seconds: 3),
+                shape: StadiumBorder(),
+                width: 250,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          }),
+    ),
+  );
+}
+
+Widget icon() {
+  return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: Align(
         alignment: Alignment.centerLeft,
         child: new Image.asset(
-          'assets/idm.png',
+          'images/bni.png',
           width: 50,
           height: 50,
-        )),
-  );
+        ),
+      ));
 }
 
 Widget namaPekerjaan() {
@@ -310,18 +302,17 @@ Widget namaPekerjaan() {
     padding: EdgeInsets.only(left: 10),
     child: RichText(
       text: TextSpan(
-        text: 'Indomaret Group',
+        text: "Bank BNI",
         style: TextStyle(
           color: Colors.grey,
           fontSize: 15,
         ),
         children: <TextSpan>[
           TextSpan(
-              text: "\nGrapic Designer",
+              text: "\nCustomer Service",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               )),
         ],
       ),
@@ -329,21 +320,7 @@ Widget namaPekerjaan() {
   );
 }
 
-Widget iconSimpan() {
-  return Padding(
-    padding: EdgeInsets.only(right: 15),
-    child: Align(
-      alignment: Alignment.centerRight,
-      child: Icon(
-        Icons.bookmark_outline,
-        color: Colors.grey,
-        size: 30,
-      ),
-    ),
-  );
-}
-
-Widget gajilokasi() {
+Widget gajidanlokasi() {
   return Align(
     alignment: Alignment.centerLeft,
     child: Padding(
@@ -353,7 +330,7 @@ Widget gajilokasi() {
           RichText(
             textAlign: TextAlign.left,
             text: TextSpan(
-              text: "Rp.1.730.000",
+              text: "Rp. 1.730.000",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
@@ -379,7 +356,7 @@ Widget syarat1() {
   return Align(
     alignment: Alignment.bottomLeft,
     child: Padding(
-      padding: const EdgeInsets.only(left: 15, top: 15),
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
       child: Row(
         children: <Widget>[
           InkWell(
@@ -410,7 +387,7 @@ Widget syarat2() {
   return Align(
     alignment: Alignment.bottomLeft,
     child: Padding(
-      padding: const EdgeInsets.only(left: 15, top: 15),
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
       child: Row(
         children: <Widget>[
           InkWell(
@@ -418,7 +395,7 @@ Widget syarat2() {
               padding: EdgeInsets.symmetric(vertical: 5),
               width: 100,
               child: Text(
-                "FullTime",
+                "Full Time",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 12,
@@ -439,184 +416,27 @@ Widget syarat2() {
 
 Widget tanggal() {
   return Padding(
-    padding: const EdgeInsets.only(right: 15),
+    padding: const EdgeInsets.only(right: 15, bottom: 15),
     child: Align(
       alignment: Alignment.bottomRight,
       child: Text(
-        "10 Des'21",
+        "10 Des '21",
       ),
     ),
   );
 }
 
-Widget rgIcon1() {
+Widget icon2() {
   return Padding(
-    padding: const EdgeInsets.only(left: 15),
-    child: Align(
+      padding: const EdgeInsets.only(left: 15),
+      child: Align(
         alignment: Alignment.centerLeft,
         child: new Image.asset(
-          'assets/hactive.jpg',
+          'images/ruangguru.png',
           width: 50,
           height: 50,
-        )),
-  );
-}
-
-Widget namaPekerjaan1() {
-  return Padding(
-    padding: EdgeInsets.only(left: 10),
-    child: RichText(
-      text: TextSpan(
-        text: 'Hactiv8',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 15,
         ),
-        children: <TextSpan>[
-          TextSpan(
-              text: "\nDesign Grafis",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              )),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget iconSimpan1() {
-  return Padding(
-    padding: EdgeInsets.only(right: 15),
-    child: Align(
-      alignment: Alignment.centerRight,
-      child: Icon(
-        Icons.bookmark_outline,
-        color: Colors.grey,
-        size: 30,
-      ),
-    ),
-  );
-}
-
-Widget gajilokasi1() {
-  return Align(
-    alignment: Alignment.centerLeft,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 15, top: 15),
-      child: Row(
-        children: <Widget>[
-          RichText(
-            textAlign: TextAlign.left,
-            text: TextSpan(
-              text: "Rp.1.730.000",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: "\nYogyakarta, Indonesia",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    ),
-  );
-}
-
-Widget syarat11() {
-  return Align(
-    alignment: Alignment.bottomLeft,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 15, top: 15),
-      child: Row(
-        children: <Widget>[
-          InkWell(
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              width: 50,
-              child: Text(
-                "SMA",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget syarat21() {
-  return Align(
-    alignment: Alignment.bottomLeft,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 15, top: 15),
-      child: Row(
-        children: <Widget>[
-          InkWell(
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              width: 100,
-              child: Text(
-                "FullTime",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget tanggal1() {
-  return Padding(
-    padding: const EdgeInsets.only(right: 15),
-    child: Align(
-      alignment: Alignment.bottomRight,
-      child: Text(
-        "6 Des'21",
-      ),
-    ),
-  );
-}
-
-Widget rgIcon2() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 15),
-    child: Align(
-        alignment: Alignment.centerLeft,
-        child: new Image.asset(
-          'assets/ralali.png',
-          width: 50,
-          height: 50,
-        )),
-  );
+      ));
 }
 
 Widget namaPekerjaan2() {
@@ -624,18 +444,17 @@ Widget namaPekerjaan2() {
     padding: EdgeInsets.only(left: 10),
     child: RichText(
       text: TextSpan(
-        text: 'Ralali.com',
+        text: "Ruang Guru",
         style: TextStyle(
-          color: Colors.black,
+          color: Colors.grey,
           fontSize: 15,
         ),
         children: <TextSpan>[
           TextSpan(
-              text: "\nGrapic Desain",
+              text: "\nCustomer Service",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               )),
         ],
       ),
@@ -643,9 +462,9 @@ Widget namaPekerjaan2() {
   );
 }
 
-Widget iconSimpan2() {
+Widget iconsimpan2() {
   return Padding(
-    padding: EdgeInsets.only(right: 15),
+    padding: const EdgeInsets.only(right: 15),
     child: Align(
       alignment: Alignment.centerRight,
       child: Icon(
@@ -657,7 +476,7 @@ Widget iconSimpan2() {
   );
 }
 
-Widget gajilokasi2() {
+Widget gajidanlokasi2() {
   return Align(
     alignment: Alignment.centerLeft,
     child: Padding(
@@ -667,7 +486,7 @@ Widget gajilokasi2() {
           RichText(
             textAlign: TextAlign.left,
             text: TextSpan(
-              text: "Rp.1.730.000",
+              text: "Rp. 1.730.000",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
@@ -693,7 +512,7 @@ Widget syarat12() {
   return Align(
     alignment: Alignment.bottomLeft,
     child: Padding(
-      padding: const EdgeInsets.only(left: 15, top: 15),
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
       child: Row(
         children: <Widget>[
           InkWell(
@@ -724,7 +543,7 @@ Widget syarat22() {
   return Align(
     alignment: Alignment.bottomLeft,
     child: Padding(
-      padding: const EdgeInsets.only(left: 15, top: 15),
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
       child: Row(
         children: <Widget>[
           InkWell(
@@ -732,7 +551,7 @@ Widget syarat22() {
               padding: EdgeInsets.symmetric(vertical: 5),
               width: 100,
               child: Text(
-                "FullTime",
+                "Full Time",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 12,
@@ -751,14 +570,171 @@ Widget syarat22() {
   );
 }
 
-Widget tanggal12() {
+Widget tanggal2() {
   return Padding(
-    padding: const EdgeInsets.only(right: 15),
+    padding: const EdgeInsets.only(right: 15, bottom: 15),
     child: Align(
       alignment: Alignment.bottomRight,
       child: Text(
-        "6 Des'21",
+        "6 Des '21",
       ),
     ),
   );
 }
+
+Widget icon3() {
+  return Padding(
+      padding: const EdgeInsets.only(left: 15),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: new Image.asset(
+          'images/ruangguru.png',
+          width: 50,
+          height: 50,
+        ),
+      ));
+}
+
+Widget namaPekerjaan3() {
+  return Padding(
+    padding: EdgeInsets.only(left: 10),
+    child: RichText(
+      text: TextSpan(
+        text: "Ruang Guru",
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 15,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+              text: "\nMarketing Online",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              )),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget iconsimpan3() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15),
+    child: Align(
+      alignment: Alignment.centerRight,
+      child: Icon(
+        Icons.bookmark_outline,
+        color: Colors.grey,
+        size: 30,
+      ),
+    ),
+  );
+}
+
+Widget gajidanlokasi3() {
+  return Align(
+    alignment: Alignment.centerLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top: 15),
+      child: Row(
+        children: <Widget>[
+          RichText(
+            textAlign: TextAlign.left,
+            text: TextSpan(
+              text: "Rp. 1.730.000",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: "\nYogyakarta, Indonesia",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+Widget syarat13() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 50,
+              child: Text(
+                "SMA",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget syarat23() {
+  return Align(
+    alignment: Alignment.bottomLeft,
+    child: Padding(
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
+      child: Row(
+        children: <Widget>[
+          InkWell(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              width: 100,
+              child: Text(
+                "Full Time",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget tanggal3() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 15, bottom: 15),
+    child: Align(
+      alignment: Alignment.bottomRight,
+      child: Text(
+        "6 Des '21",
+      ),
+    ),
+  );
+}
+

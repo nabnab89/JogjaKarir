@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:jogja_karir/detail_pekerjaan2.dart';
-import 'package:jogja_karir/login.dart';
-import 'package:jogja_karir/kebijakan.dart';
-import 'package:jogja_karir/search.dart';
 
-import 'job_slider.dart';
-import 'model/job.dart';
-
-class HomeWithLogin extends StatefulWidget {
+class Home extends StatefulWidget {
 
   @override
   _AkunState createState() => _AkunState();
 }
 
-class _AkunState extends State<HomeWithLogin> {
-  final List<Job> jobList = Job.getJob();
+class _AkunState extends State<Home> {
   @override
   void initState() {
     super.initState();
@@ -24,65 +16,6 @@ class _AkunState extends State<HomeWithLogin> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
-        title: Text('Beranda'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Search()));
-            },
-          ),
-        ],
-      ),
-      drawer: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(35), bottomRight: Radius.circular(35)),
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              Container(
-                height: 90,
-                child: DrawerHeader(
-                  child: Text(
-                    'Menu',
-                    style: TextStyle(fontSize: 40),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Text('Login disini'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Login()));
-                },
-              ),
-              ListTile(
-                title: Text('Kebijakan'),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Kebijakan()));
-                },
-              ),
-              ListTile(
-                title: Text('Pengaturan'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Update Aplikasi'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
       body: SafeArea(
         child: new Scaffold(
           body: new Container(
@@ -92,23 +25,6 @@ class _AkunState extends State<HomeWithLogin> {
               width: double.maxFinite,
               child: ListView(
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                  ),
-                  Text(
-                    "Untuk Kamu",
-                    style:
-                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    height: 180.0,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: jobList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return jobCardTemplate(jobList[index], context);
-                        }),
-                  ),
                   Padding(
                     padding: EdgeInsets.only(top: 16.0),
                   ),
@@ -123,8 +39,8 @@ class _AkunState extends State<HomeWithLogin> {
                   Card(
                     child: InkWell(
                       onTap: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => KirimLamaran()));
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) => KirimLamaran()));
                       },
                       child: Padding(
                         padding: EdgeInsets.all(7),
@@ -365,6 +281,7 @@ class _AkunState extends State<HomeWithLogin> {
     );
   }
 }
+
 Widget icon() {
   return Padding(
       padding: const EdgeInsets.only(left: 15),
@@ -376,6 +293,7 @@ Widget icon() {
       )
   );
 }
+
 Widget namaPekerjaan() {
   return Padding(
     padding: EdgeInsets.only(left: 10),
@@ -399,6 +317,9 @@ Widget namaPekerjaan() {
     ),
   );
 }
+
+
+
 Widget gajidanlokasi() {
   return Align(
     alignment: Alignment.centerLeft,
@@ -430,6 +351,7 @@ Widget gajidanlokasi() {
     ),
   );
 }
+
 Widget syarat1() {
   return Align(
     alignment: Alignment.bottomLeft,
@@ -460,6 +382,7 @@ Widget syarat1() {
     ),
   );
 }
+
 Widget syarat2() {
   return Align(
     alignment: Alignment.bottomLeft,
@@ -490,6 +413,7 @@ Widget syarat2() {
     ),
   );
 }
+
 Widget tanggal() {
   return Padding(
     padding: const EdgeInsets.only(right: 15, bottom: 15),
@@ -500,6 +424,7 @@ Widget tanggal() {
     ),
   );
 }
+
 Widget icon2() {
   return Padding(
       padding: const EdgeInsets.only(left: 15),
@@ -511,6 +436,7 @@ Widget icon2() {
       )
   );
 }
+
 Widget namaPekerjaan2() {
   return Padding(
     padding: EdgeInsets.only(left: 10),
@@ -534,6 +460,7 @@ Widget namaPekerjaan2() {
     ),
   );
 }
+
 Widget iconsimpan2() {
   return Padding(
     padding: const EdgeInsets.only(right: 15),
@@ -547,6 +474,7 @@ Widget iconsimpan2() {
     ),
   );
 }
+
 Widget gajidanlokasi2() {
   return Align(
     alignment: Alignment.centerLeft,
@@ -578,6 +506,7 @@ Widget gajidanlokasi2() {
     ),
   );
 }
+
 Widget syarat12() {
   return Align(
     alignment: Alignment.bottomLeft,
@@ -608,6 +537,7 @@ Widget syarat12() {
     ),
   );
 }
+
 Widget syarat22() {
   return Align(
     alignment: Alignment.bottomLeft,
@@ -638,6 +568,7 @@ Widget syarat22() {
     ),
   );
 }
+
 Widget tanggal2() {
   return Padding(
     padding: const EdgeInsets.only(right: 15, bottom: 15),
@@ -648,6 +579,7 @@ Widget tanggal2() {
     ),
   );
 }
+
 Widget icon3() {
   return Padding(
       padding: const EdgeInsets.only(left: 15),
@@ -659,6 +591,7 @@ Widget icon3() {
       )
   );
 }
+
 Widget namaPekerjaan3() {
   return Padding(
     padding: EdgeInsets.only(left: 10),
@@ -682,6 +615,7 @@ Widget namaPekerjaan3() {
     ),
   );
 }
+
 Widget iconsimpan3() {
   return Padding(
     padding: const EdgeInsets.only(right: 15),
@@ -695,6 +629,7 @@ Widget iconsimpan3() {
     ),
   );
 }
+
 Widget gajidanlokasi3() {
   return Align(
     alignment: Alignment.centerLeft,
@@ -726,6 +661,7 @@ Widget gajidanlokasi3() {
     ),
   );
 }
+
 Widget syarat13() {
   return Align(
     alignment: Alignment.bottomLeft,
@@ -756,6 +692,7 @@ Widget syarat13() {
     ),
   );
 }
+
 Widget syarat23() {
   return Align(
     alignment: Alignment.bottomLeft,
@@ -786,6 +723,7 @@ Widget syarat23() {
     ),
   );
 }
+
 Widget tanggal3() {
   return Padding(
     padding: const EdgeInsets.only(right: 15, bottom: 15),

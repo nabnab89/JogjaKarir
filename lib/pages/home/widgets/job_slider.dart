@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'model/job.dart';
+import 'package:jogja_karir/model/job.dart';
 
 Widget jobCardTemplate(Job job, BuildContext context) {
   return InkWell(
