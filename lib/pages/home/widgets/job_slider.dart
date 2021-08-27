@@ -1,16 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jogja_karir/model/job.dart';
+import 'package:jogja_karir/pages/vacancy/detail_pekerjaan.dart';
 
 Widget jobCardTemplate(Job job, BuildContext context) {
-  return InkWell(
-    child: Container(
-      width: 320.0,
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15))
-        ),
-        elevation: 1,
-        color: Colors.white,
+  return Container(
+    width: 320.0,
+    child: Card(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15))
+      ),
+      elevation: 1,
+      color: Colors.white,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context, CupertinoPageRoute(builder: (builder) => DetailPekerjaan()));
+        },
         child: Padding(
           padding: EdgeInsets.all(15.0),
           child: Column(
